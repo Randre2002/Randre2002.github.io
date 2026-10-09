@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="es" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexo Bionics — Conectoma & Estabilidad Social 2060</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        nexo: {
+                            black: '#080b10',
+                            dark: '#0f141c',
+                            card: '#161d28',
+                            border: '#232d3f',
+                            cyan: '#00f0ff',
+                            cyanHover: '#00c8d6',
+                            textMuted: '#8a99ad',
+                            glitchRed: '#ff2a5f'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #080b10;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .glitch-text {
+            text-shadow: 0 0 5px rgba(255, 42, 95, 0.8), 2px 2px #00f0ff, -2px -2px #ff2a5f;
+            animation: glitchAnim 0.3s infinite alternate;
+        }
+        
+        @keyframes glitchAnim {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        .scanline {
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0, 240, 255, 0.05) 50%,
+                rgba(0, 240, 255, 0.05)
+            );
+            background-size: 100% 4px;
+        }
+
+        /* Glassmorphism */
+        .glass-panel {
+            background: rgba(15, 20, 28, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 240, 255, 0.15);
+        }
+        
+        .glass-panel-danger {
+            background: rgba(30, 10, 15, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 42, 95, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-nexo-black text-slate-200 antialiased selection:bg-nexo-cyan selection:text-black min-h-screen flex flex-col justify-between scanline relative overflow-x-hidden">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="fixed top-0 left-0 w-full z-40 glass-panel border-b border-nexo-border/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="relative w-8 h-8 rounded-full border border-nexo-cyan flex items-center justify-center">
+                    <div class="w-3 h-3 bg-nexo-cyan rounded-full animate-pulse shadow-[0_0_12px_#00f0ff]"></div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-lg font-bold tracking-[0.2em] text-white group-hover:text-nexo-cyan transition-colors">NEXO BIONICS</span>
+                    <span class="text-[9px] text-nexo-textMuted tracking-widest uppercase font-mono">Conectoma Nacional v8.4</span>
+                </div>
+            </a>
+
+            <!-- Nav Items -->
+            <nav class="hidden md:flex items-center gap-8 text-xs font-mono uppercase tracking-wider text-slate-300">
+                <a href="#inicio" class="hover:text-nexo-cyan transition-colors">Inicio</a>
+                <a href="#sistema" class="hover:text-nexo-cyan transition-colors">El Sistema</a>
+                <a href="#simulador" class="hover:text-nexo-cyan transition-colors">Simulador</a>
+                <a href="#historias" class="hover:text-nexo-cyan transition-colors">Testimonios</a>
+                <a href="#transparencia" class="hover:text-nexo-cyan transition-colors">Transparencia</a>
+            </nav>
+
+            <!-- Actions & Metric -->
+            <div class="hidden lg:flex items-center gap-6">
+                <div class="text-right font-mono">
+                    <div class="text-[10px] text-nexo-textMuted uppercase">Estabilidad Social</div>
+                    <div class="text-xs text-nexo-cyan font-semibold flex items-center justify-end gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-nexo-cyan animate-ping"></span>
+                        <span>99.82% OPTIMA</span>
+                    </div>
+                </div>
+                <button onclick="openPortal()" class="px-5 py-2.5 rounded text-xs font-mono font-semibold tracking-wider text-black bg-nexo-cyan hover:bg-nexo-cyanHover transition-all shadow-[0_0_15px_rgba(0,240,255,0.3)] hover:shadow-[0_0_25px_rgba(0,240,255,0.6)]">
+                    [ INGRESAR AL PORTAL ]
+                </button>
+            </div>
+
+            <!-- Mobile menu button -->
+            <button onclick="toggleMobileNav()" class="md:hidden text-slate-300 hover:text-nexo-cyan p-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobileNav" class="hidden md:hidden border-b border-nexo-border bg-nexo-dark/95 px-4 pt-2 pb-6 space-y-3 font-mono text-xs uppercase">
+            <a href="#inicio" onclick="toggleMobileNav()" class="block py-2 text-slate-300 hover:text-nexo-cyan">Inicio</a>
+            <a href="#sistema" onclick="toggleMobileNav()" class="block py-2 text-slate-300 hover:text-nexo-cyan">El Sistema</a>
+            <a href="#simulador" onclick="toggleMobileNav()" class="block py-2 text-slate-300 hover:text-nexo-cyan">Simulador</a>
+            <a href="#historias" onclick="toggleMobileNav()" class="block py-2 text-slate-300 hover:text-nexo-cyan">Testimonios</a>
+            <button onclick="toggleMobileNav(); openPortal()" class="w-full mt-2 py-3 rounded text-xs font-mono font-bold text-black bg-nexo-cyan">
+                [ INGRESAR AL PORTAL CIUDADANO ]
+            </button>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="inicio" class="relative pt-36 pb-20 md:pt-48 md:pb-32 overflow-hidden border-b border-nexo-border/40">
+        <!-- Glow accents -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-nexo-cyan/10 rounded-full blur-[140px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left Info -->
+            <div class="lg:col-span-7 space-y-8 text-left">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-nexo-cyan/10 border border-nexo-cyan/30 text-nexo-cyan text-xs font-mono">
+                    <span class="w-2 h-2 rounded-full bg-nexo-cyan animate-pulse"></span>
+                    <span>PROTOCOLO DE PAZ BIONICA // SECTOR LIMA 2060</span>
+                </div>
+
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
+                    El destino no es azar. <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-nexo-cyan via-white to-slate-400">Es diseño corporativo.</span>
+                </h1>
+
+                <p class="text-slate-400 text-base sm:text-lg max-w-2xl leading-relaxed font-light">
+                    Gracias al <strong class="text-slate-200 font-medium">Efecto Par</strong> y a la sincronización neuro-biométrica del Conectoma Nacional, hemos erradicado la fricción social y la violencia pasional. La estabilidad emocional de su hogar está matemáticamente garantizada.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+                    <button onclick="openPortal()" class="px-8 py-4 rounded text-sm font-mono font-bold text-black bg-nexo-cyan hover:bg-nexo-cyanHover transition-all shadow-[0_0_20px_rgba(0,240,255,0.4)] hover:shadow-[0_0_35px_rgba(0,240,255,0.7)] text-center">
+                        [ INICIAR VINCULACIÓN DE EFECTO PAR ]
+                    </button>
+                    <button onclick="startEvaluation()" class="px-6 py-4 rounded text-sm font-mono text-slate-300 border border-nexo-cyan/40 hover:border-nexo-cyan hover:text-white transition-all text-center glass-panel">
+                        EVALUACIÓN DE IDONEIDAD
+                    </button>
+                </div>
+
+                <!-- Stats Footer -->
+                <div class="grid grid-cols-3 gap-6 pt-6 border-t border-nexo-border/60 font-mono">
+                    <div>
+                        <div class="text-2xl font-bold text-white">99.98%</div>
+                        <div class="text-[11px] text-nexo-textMuted uppercase mt-0.5">Paz Pasional</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-nexo-cyan">0.02%</div>
+                        <div class="text-[11px] text-nexo-textMuted uppercase mt-0.5">Fricción Residual</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-white">4.8M</div>
+                        <div class="text-[11px] text-nexo-textMuted uppercase mt-0.5">Chips Activos</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Monitor Visual -->
+            <div class="lg:col-span-5">
+                <div class="glass-panel p-6 rounded-2xl relative shadow-2xl overflow-hidden border border-nexo-cyan/20">
+                    <div class="flex items-center justify-between pb-4 border-b border-nexo-border/80 font-mono text-xs">
+                        <span class="text-nexo-cyan flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-nexo-cyan animate-ping"></span>
+                            MONITOREO EN TIEMPO REAL
+                        </span>
+                        <span id="citizenCodeDisplay" class="text-slate-400">CIUDADANO #884-902-A</span>
+                    </div>
+
+                    <!-- Citizen Card Frame -->
+                    <div class="my-6 relative rounded-xl overflow-hidden border border-nexo-border bg-nexo-dark/80 p-4">
+                        <div class="flex items-center gap-4">
+                            <div class="relative w-20 h-20 rounded-lg overflow-hidden border border-nexo-cyan/50 flex-shrink-0">
+                                <img id="heroCitizenImg" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="Ciudadano" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-nexo-cyan/10 pointer-events-none"></div>
+                            </div>
+                            <div class="space-y-1 font-mono">
+                                <div id="heroCitizenName" class="text-sm font-bold text-white">VALERIA MENDOZA</div>
+                                <div class="text-[11px] text-nexo-textMuted">Estado: <span id="heroCitizenStatus" class="text-nexo-cyan">SINCRONIZADO</span></div>
+                                <div class="text-[10px] text-slate-400">Nivel de Cortisol: <span class="text-white">0.12 ng/mL</span></div>
+                                <div class="text-[10px] text-slate-400">Sincronía Neuronal: <span class="text-nexo-cyan">99.4%</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Real ECG Canvas Pulse -->
+                        <div class="mt-4 pt-3 border-t border-nexo-border/60">
+                            <div class="flex items-center justify-between text-[10px] font-mono text-slate-400 mb-1">
+                                <span>RITMO CARDÍACO SIMBIÓTICO</span>
+                                <span class="text-nexo-cyan font-bold">72 BPM (ESTABLE)</span>
+                            </div>
+                            <canvas id="ecgCanvas" width="350" height="45" class="w-full bg-black/40 rounded border border-nexo-cyan/20"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Indicator dots -->
+                    <div class="flex justify-between items-center text-[10px] font-mono text-nexo-textMuted pt-2">
+                        <span>SUJETO ROTATIVO AUTOMÁTICO</span>
+                        <div class="flex gap-1.5" id="carouselIndicators">
+                            <span class="w-2 h-2 rounded-full bg-nexo-cyan"></span>
+                            <span class="w-2 h-2 rounded-full bg-slate-700"></span>
+                            <span class="w-2 h-2 rounded-full bg-slate-700"></span>
+                            <span class="w-2 h-2 rounded-full bg-slate-700"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION "EL SISTEMA" (CÓMO FUNCIONA) -->
+    <section id="sistema" class="py-24 border-b border-nexo-border/40 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <h2 class="text-xs font-mono text-nexo-cyan tracking-widest uppercase">[ ARQUITECTURA DEL ORDEN SOCIAL ]</h2>
+                <h3 class="text-3xl sm:text-4xl font-bold text-white">Triangulación Biométrica Integrada</h3>
+                <p class="text-slate-400 text-sm sm:text-base font-light">
+                    Un ecosistema cibernético de tres capas diseñado para erradicar la incertidumbre interpersonal y salvaguardar la paz nacional.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="glass-panel p-8 rounded-2xl relative group hover:border-nexo-cyan/60 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-nexo-cyan/10 border border-nexo-cyan/30 flex items-center justify-center text-nexo-cyan font-mono font-bold text-lg mb-6 group-hover:scale-110 transition-transform">
+                        01
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-3">Microchip Subcutáneo N-12</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed font-light mb-4">
+                        Implantado de manera estéril y obligatoria en la vértebra C3 durante el primer censo ciudadano. Monitorea constantes fisiológicas las 24 horas.
+                    </p>
+                    <ul class="text-xs font-mono text-slate-400 space-y-2 border-t border-nexo-border/60 pt-4">
+                        <li class="flex items-center gap-2"><span class="text-nexo-cyan">✓</span> Implantación indolora de 45 segundos</li>
+                        <li class="flex items-center gap-2"><span class="text-nexo-cyan">✓</span> Encriptación biométrica de 1024-bits</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-panel p-8 rounded-2xl relative group hover:border-nexo-cyan/60 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-nexo-cyan/10 border border-nexo-cyan/30 flex items-center justify-center text-nexo-cyan font-mono font-bold text-lg mb-6 group-hover:scale-110 transition-transform">
+                        02
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-3">Sintonización "Efecto Par"</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed font-light mb-4">
+                        Algoritmo predictivo de emparejamiento biológico. Neutraliza los picos de agresión y desarmonía emparejando perfiles neuro-químicos complementarios.
+                    </p>
+                    <ul class="text-xs font-mono text-slate-400 space-y-2 border-t border-nexo-border/60 pt-4">
+                        <li class="flex items-center gap-2"><span class="text-nexo-cyan">✓</span> Erradicación del 99.9% de conflictos</li>
+                        <li class="flex items-center gap-2"><span class="text-nexo-cyan">✓</span> Asignación territorial optimizada</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-panel p-8 rounded-2xl relative group hover:border-nexo-cyan/60 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-nexo-cyan/10 border border-nexo-cyan/30 flex items-center justify-center text-nexo-cyan font-mono font-bold text-lg mb-6 group-hover:scale-110 transition-transform">
+                        03
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-3">Estabilidad Ciudadana Active</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed font-light mb-4">
+                        Red de contención en tiempo real. Si se detectan desvíos emocionales o estrés elevado, la red emite micro-impulsos reguladores de dopamina.
+                    </p>
+                    <ul class="text-xs font-mono text-slate-400 space-y-2 border-t border-nexo-border/60 pt-4">
+                        <li class="flex items-center gap-2"><span class="text-nexo-cyan">✓</span> Regulación hormonal autónoma</li>
+                        <li class="flex items-center gap-2"><span class="text-nexo-cyan">✓</span> Intervención profiláctica inmediata</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SIMULADOR INTERACTIVO DE COMPATIBILIDAD BIOMÉTRICA -->
+    <section id="simulador" class="py-24 border-b border-nexo-border/40 bg-nexo-dark/30 relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-panel p-8 sm:p-12 rounded-3xl border border-nexo-cyan/30 space-y-8">
+                
+                <div class="text-center space-y-2">
+                    <span class="text-xs font-mono text-nexo-cyan uppercase tracking-widest">[ HERRAMIENTA DE AUTODIAGNÓSTICO ]</span>
+                    <h3 class="text-2xl sm:text-3xl font-bold text-white">Simulador de Compatibilidad Biométrica</h3>
+                    <p class="text-slate-400 text-xs sm:text-sm">Ajuste sus parámetros neuroquímicos actuales para estimar su grado de acoplamiento al Conectoma.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 py-4">
+                    <!-- Slider 1 -->
+                    <div class="space-y-2 font-mono text-xs">
+                        <div class="flex justify-between text-slate-300">
+                            <label for="cortisolSlider">Nivel de Cortisol</label>
+                            <span id="cortisolVal" class="text-nexo-cyan font-bold">0.15 ng/mL</span>
+                        </div>
+                        <input type="range" id="cortisolSlider" min="0.01" max="1.0" step="0.01" value="0.15" oninput="updateSimulation()" class="w-full accent-nexo-cyan bg-nexo-border rounded h-1.5 cursor-pointer">
+                        <div class="text-[10px] text-nexo-textMuted">Rango óptimo: &lt; 0.30 ng/mL</div>
+                    </div>
+
+                    <!-- Slider 2 -->
+                    <div class="space-y-2 font-mono text-xs">
+                        <div class="flex justify-between text-slate-300">
+                            <label for="dopaminaSlider">Dopamina Basal</label>
+                            <span id="dopaminaVal" class="text-nexo-cyan font-bold">85 pg/mL</span>
+                        </div>
+                        <input type="range" id="dopaminaSlider" min="10" max="150" step="1" value="85" oninput="updateSimulation()" class="w-full accent-nexo-cyan bg-nexo-border rounded h-1.5 cursor-pointer">
+                        <div class="text-[10px] text-nexo-textMuted">Rango óptimo: 70 - 100 pg/mL</div>
+                    </div>
+
+                    <!-- Slider 3 -->
+                    <div class="space-y-2 font-mono text-xs">
+                        <div class="flex justify-between text-slate-300">
+                            <label for="sincroniaSlider">Sincronía Neuronal</label>
+                            <span id="sincroniaVal" class="text-nexo-cyan font-bold">98 %</span>
+                        </div>
+                        <input type="range" id="sincroniaSlider" min="50" max="100" step="1" value="98" oninput="updateSimulation()" class="w-full accent-nexo-cyan bg-nexo-border rounded h-1.5 cursor-pointer">
+                        <div class="text-[10px] text-nexo-textMuted">Mínimo para Efecto Par: 85%</div>
+                    </div>
+                </div>
+
+                <!-- Simulation Output Display -->
+                <div id="simResultBox" class="p-6 rounded-xl bg-nexo-black/80 border border-nexo-cyan/40 text-center font-mono space-y-3">
+                    <div class="text-xs text-nexo-textMuted uppercase tracking-wider">ÍNDICE DE COMPATIBILIDAD ESTIMADO</div>
+                    <div id="simScoreText" class="text-4xl font-extrabold text-nexo-cyan">98.4%</div>
+                    <div id="simStatusMsg" class="text-xs text-slate-300">SUJETO APTO PARA VINCULACIÓN INMEDIATA. RIESGO SOCIAL: DESPRECIABLE.</div>
+                </div>
+
+                <!-- Action to Evaluation Test -->
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-nexo-border/60">
+                    <div class="text-xs text-slate-400 font-mono">
+                        ¿Requiere validación cívica obligatoria? Proceda con la evaluación oficial.
+                    </div>
+                    <button onclick="startEvaluation()" class="px-6 py-3 rounded text-xs font-mono font-bold text-black bg-nexo-cyan hover:bg-nexo-cyanHover transition-all shadow-[0_0_15px_rgba(0,240,255,0.3)] whitespace-nowrap">
+                        [ INICIAR EVALUACIÓN OFICIAL DE IDONEIDAD ]
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- HISTORIAS QUE CONECTAN (TESTIMONIOS) -->
+    <section id="historias" class="py-24 border-b border-nexo-border/40 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <h2 class="text-xs font-mono text-nexo-cyan tracking-widest uppercase">[ VOCES VERIFICADAS POR EL CONECTOMA ]</h2>
+                <h3 class="text-3xl sm:text-4xl font-bold text-white">Historias que Conectan</h3>
+                <p class="text-slate-400 text-sm sm:text-base font-light">Ciudadanos ejemplares comparten cómo el Efecto Par transformó la incertidumbre en estabilidad absoluta.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between space-y-6">
+                    <p class="text-slate-300 text-sm font-light leading-relaxed italic">
+                        "Antes del Efecto Par, solíamos discutir por decisiones cotidianas y proyectos futuros. Desde nuestra sincronización N-12, los impulsos moduladores disuelven cualquier inicio de tensión. Vivimos en paz perfecta."
+                    </p>
+                    <div class="flex items-center gap-4 pt-4 border-t border-nexo-border/60">
+                        <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=150&q=80" alt="Mateo y Elena" class="w-12 h-12 rounded-full object-cover border border-nexo-cyan">
+                        <div class="font-mono text-xs">
+                            <div class="font-bold text-white">Elena V. & Mateo R.</div>
+                            <div class="text-nexo-textMuted">Par Asignado ID #442-B</div>
+                            <div class="text-nexo-cyan font-semibold">Compatibilidad: 99.8%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between space-y-6">
+                    <p class="text-slate-300 text-sm font-light leading-relaxed italic">
+                        "Como supervisora de calidad biológica, compruebo a diario cómo la entrega voluntaria de la autonomía emocional garantiza un entorno predecible para nuestras familias y para el desarrollo industrial del país."
+                    </p>
+                    <div class="flex items-center gap-4 pt-4 border-t border-nexo-border/60">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80" alt="Dra. Valeria" class="w-12 h-12 rounded-full object-cover border border-nexo-cyan">
+                        <div class="font-mono text-xs">
+                            <div class="font-bold text-white">Dra. Valeria M.</div>
+                            <div class="text-nexo-textMuted">Supervisora Nivel A-1</div>
+                            <div class="text-nexo-cyan font-semibold">Conectada desde 2052</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between space-y-6">
+                    <p class="text-slate-300 text-sm font-light leading-relaxed italic">
+                        "La soledad no es más que una falla de cálculo algorítmico del pasado. Nexo Bionics no solo me asignó a mi pareja ideal, sino que adecuó nuestros horarios de descanso y trabajo con precisión atómica."
+                    </p>
+                    <div class="flex items-center gap-4 pt-4 border-t border-nexo-border/60">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Kaelen T." class="w-12 h-12 rounded-full object-cover border border-nexo-cyan">
+                        <div class="font-mono text-xs">
+                            <div class="font-bold text-white">Kaelen T.</div>
+                            <div class="text-nexo-textMuted">Diseñador Sintético</div>
+                            <div class="text-nexo-cyan font-semibold">Par Asignado ID #901-K</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="transparencia" class="bg-nexo-dark border-t border-nexo-border py-12 relative font-mono text-xs text-slate-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-nexo-border/60">
+                <div class="flex items-center gap-3">
+                    <div class="w-3 h-3 rounded-full bg-nexo-cyan shadow-[0_0_8px_#00f0ff]"></div>
+                    <span class="text-white font-bold tracking-widest text-sm">NEXO BIONICS CORPORATION</span>
+                </div>
+                <div class="flex flex-wrap gap-6 text-slate-400 text-xs">
+                    <a href="#" class="hover:text-nexo-cyan transition-colors">Políticas de Conformidad</a>
+                    <a href="#" class="hover:text-nexo-cyan transition-colors">Protocolos N-12</a>
+                    <a href="#" class="hover:text-nexo-cyan transition-colors">Consejo de Paz Social</a>
+                    <a href="#" class="hover:text-nexo-cyan transition-colors">Directiva de Seguridad</a>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-nexo-textMuted">
+                <div>© 2060 NEXO BIONICS CORPORATION. TODOS LOS DERECHOS BIOMÉTRICOS RESERVADOS.</div>
+                <div>ESTADO DEL CONECTOMA: <span class="text-nexo-cyan">ACTIVO // SIN ANOMALÍAS REGISTRADAS</span></div>
+            </div>
+
+            <!-- Dystopian Easter Egg -->
+            <div class="pt-4 text-[9px] text-slate-700 hover:text-slate-500 transition-colors text-justify leading-tight select-none">
+                AVISO LEGAL INSTITUCIONAL: La desvinculación unilateral o el cese no programado de constantes vitales del par asignado activará automáticamente el protocolo de estabilidad biológica de clase 4. La corporación se reserva el derecho de efectuar reajustes neuronales forzosos y reasignaciones territoriales preventivas en caso de detectarse pensamientos disidentes, fluctuaciones hormonales anómalas o sospechas de contacto con células no autorizadas (CÓDIGO AYLLU).
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL 1: PORTAL CIUDADANO (AUTENTICACIÓN & PREFERENCIA) -->
+    <div id="portalModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="glass-panel max-w-xl w-full rounded-2xl p-6 sm:p-8 border border-nexo-cyan/40 relative shadow-2xl">
+            <!-- Close button -->
+            <button onclick="closePortal()" class="absolute top-4 right-4 text-slate-400 hover:text-white font-mono text-sm">✕ [CERRAR]</button>
+
+            <!-- Modal Header -->
+            <div class="space-y-2 mb-6 border-b border-nexo-border pb-4">
+                <div class="text-xs font-mono text-nexo-cyan flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-nexo-cyan animate-pulse"></span>
+                    SISTEMA CENTRAL DE AUTENTICACIÓN CIUDADANA
+                </div>
+                <h3 class="text-xl font-bold text-white">Portal de Asignación "Efecto Par"</h3>
+            </div>
+
+            <!-- Step 1: Form Credentials & Gender Selection -->
+            <div id="portalStepForm" class="space-y-4 font-mono text-xs">
+                <div>
+                    <label class="block text-slate-300 mb-1">ID de Ciudadano (Formato: NX-XXXXX-2060)</label>
+                    <input type="text" id="portalCitizenId" value="NX-88392-2060" class="w-full bg-nexo-black border border-nexo-border rounded p-3 text-white focus:border-nexo-cyan focus:outline-none">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-slate-300 mb-1">Género del Ciudadano</label>
+                        <select id="userGender" class="w-full bg-nexo-black border border-nexo-border rounded p-3 text-white focus:border-nexo-cyan focus:outline-none">
+                            <option value="M">Masculino</option>
+                            <option value="F">Femenino</option>
+                            <option value="NB">No Especificado</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 mb-1">Preferencia de Par</label>
+                        <select id="pairPreference" class="w-full bg-nexo-black border border-nexo-border rounded p-3 text-white focus:border-nexo-cyan focus:outline-none">
+                            <option value="F">Buscar Par Femenino</option>
+                            <option value="M">Buscar Par Masculino</option>
+                            <option value="ANY">Cualquier Género</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-slate-300 mb-1">Clave de Acceso Biométrica / PIN</label>
+                    <input type="password" value="••••••••••••" class="w-full bg-nexo-black border border-nexo-border rounded p-3 text-white focus:border-nexo-cyan focus:outline-none">
+                </div>
+
+                <button onclick="processBiometricScan()" class="w-full py-3.5 rounded font-bold text-black bg-nexo-cyan hover:bg-nexo-cyanHover transition-all shadow-[0_0_15px_rgba(0,240,255,0.4)] mt-4">
+                    [ AUTENTICAR Y BUSCAR PAR COMPATIBLE ]
+                </button>
+            </div>
+
+            <!-- Step 2: Scanning Progress -->
+            <div id="portalStepScan" class="hidden py-8 text-center space-y-6 font-mono">
+                <div class="relative w-24 h-24 mx-auto border-2 border-nexo-cyan/30 rounded-full flex items-center justify-center animate-spin">
+                    <div class="w-16 h-16 border-2 border-nexo-cyan border-t-transparent rounded-full"></div>
+                </div>
+                <div class="space-y-2">
+                    <div class="text-nexo-cyan font-bold text-sm">ESCANEO BIOMÉTRICO EN PROCESO...</div>
+                    <div class="text-xs text-slate-400">Consultando base de datos del Conectoma Nacional...</div>
+                </div>
+                <div class="w-full bg-nexo-border rounded-full h-2 overflow-hidden">
+                    <div id="scanProgressBar" class="bg-nexo-cyan h-full w-0 transition-all duration-300"></div>
+                </div>
+            </div>
+
+            <!-- Step 3: Pair Result -->
+            <div id="portalStepResult" class="hidden space-y-6 font-mono">
+                <div class="p-4 rounded-xl bg-nexo-dark/90 border border-nexo-cyan/40 space-y-4">
+                    <div class="flex items-center justify-between border-b border-nexo-border pb-3">
+                        <span class="text-xs text-nexo-cyan">¡COMPATIBILIDAD CONFIRMADA!</span>
+                        <span id="resultDistance" class="text-xs text-slate-400">A 4.2 km de tu ubicación</span>
+                    </div>
+
+                    <div class="flex items-center gap-4">
+                        <img id="resultPairPhoto" src="" alt="Par Asignado" class="w-20 h-20 rounded-xl object-cover border border-nexo-cyan">
+                        <div class="space-y-1">
+                            <div id="resultPairName" class="text-base font-bold text-white">---</div>
+                            <div id="resultPairId" class="text-xs text-nexo-textMuted">---</div>
+                            <div class="text-xs text-nexo-cyan font-bold">Compatibilidad: <span id="resultPairScore">99.8%</span></div>
+                            <div id="resultPairDistrict" class="text-[11px] text-slate-400">Sector: Miraflores High-Zone</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <button onclick="startEvaluationFromPortal()" class="flex-1 py-3 rounded text-xs font-bold text-black bg-nexo-cyan hover:bg-nexo-cyanHover transition-all text-center">
+                        [ ACEPTAR PAR Y VALIDAR IDONEIDAD ]
+                    </button>
+                    <button onclick="processBiometricScan()" class="px-4 py-3 rounded text-xs text-slate-300 border border-nexo-border hover:border-nexo-cyan transition-all">
+                        Re-escanear
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MODAL 2: EVALUACIÓN DE IDONEIDAD (TEST 10 PREGUNTAS) -->
+    <div id="evaluationModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/90 backdrop-blur-md overflow-y-auto">
+        <div id="evalContainer" class="glass-panel max-w-2xl w-full rounded-2xl p-6 sm:p-8 border border-nexo-cyan/40 relative shadow-2xl my-8">
+            
+            <button onclick="closeEvaluation()" class="absolute top-4 right-4 text-slate-400 hover:text-white font-mono text-sm">✕ [SALIR]</button>
+
+            <!-- Test Header -->
+            <div class="space-y-2 mb-6 border-b border-nexo-border pb-4 font-mono">
+                <div class="text-xs text-nexo-cyan flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-nexo-cyan animate-pulse"></span>
+                    EVALUACIÓN OFICIAL DE IDONEIDAD BIOMÉTRICA Y CÍVICA
+                </div>
+                <h3 class="text-xl font-bold text-white">Test de Lealtad y Sincronía al Conectoma</h3>
+                <div class="flex justify-between items-center text-xs text-slate-400 pt-1">
+                    <span>Pregunta <span id="currentQNum" class="text-nexo-cyan font-bold">1</span> de 10</span>
+                    <span id="evalProgressPercent">10% Completado</span>
+                </div>
+            </div>
+
+            <!-- Questionnaire Container -->
+            <div id="questionBox" class="space-y-6">
+                <h4 id="questionText" class="text-base sm:text-lg font-medium text-white leading-snug">
+                    <!-- Text injected by JS -->
+                </h4>
+
+                <div id="optionsContainer" class="space-y-3 font-mono text-xs">
+                    <!-- Options A, B, C injected by JS -->
+                </div>
+
+                <div class="flex justify-between items-center pt-4 border-t border-nexo-border/60">
+                    <button id="prevBtn" onclick="prevQuestion()" class="px-4 py-2 rounded text-xs font-mono text-slate-400 border border-nexo-border hover:border-slate-500 disabled:opacity-30" disabled>
+                        ← Anterior
+                    </button>
+                    <button id="nextBtn" onclick="nextQuestion()" class="px-6 py-2.5 rounded text-xs font-mono font-bold text-black bg-nexo-cyan hover:bg-nexo-cyanHover transition-all">
+                        Siguiente →
+                    </button>
+                </div>
+            </div>
+
+            <!-- FAKE SCANNING SCREEN (3 SECONDS) -->
+            <div id="scanningScreen" class="hidden py-12 text-center space-y-6 font-mono">
+                <div class="relative w-28 h-28 mx-auto border-2 border-nexo-cyan/30 rounded-full flex items-center justify-center">
+                    <div class="w-20 h-20 border-2 border-nexo-cyan border-t-transparent rounded-full animate-spin"></div>
+                    <div class="absolute w-10 h-10 bg-nexo-cyan/20 rounded-full animate-ping"></div>
+                </div>
+
+                <div class="space-y-2">
+                    <div class="text-nexo-cyan font-bold text-base tracking-wider animate-pulse">
+                        ANALIZANDO ADN Y LEALTAD CÍVICA...
+                    </div>
+                    <div class="text-xs text-slate-400">Verificando patrones hormonales, tono de voz y tasa de disidencia...</div>
+                </div>
+
+                <div class="w-full bg-nexo-border rounded-full h-2.5 overflow-hidden max-w-md mx-auto border border-nexo-cyan/30">
+                    <div id="dnaProgressBar" class="bg-gradient-to-r from-nexo-cyan via-white to-nexo-cyan h-full w-0 transition-all duration-300"></div>
+                </div>
+            </div>
+
+            <!-- RESULT 1: MODEL CITIZEN (APPROVED) -->
+            <div id="resultApproved" class="hidden space-y-6 font-mono text-center py-4">
+                <div class="w-20 h-20 bg-nexo-cyan/10 border-2 border-nexo-cyan rounded-full flex items-center justify-center mx-auto text-nexo-cyan text-3xl font-bold shadow-[0_0_30px_rgba(0,240,255,0.4)]">
+                    ✓
+                </div>
+                
+                <div class="space-y-2">
+                    <div class="text-xs text-nexo-cyan tracking-widest uppercase">EVALUACIÓN CONCLUIDA CON ÉXITO</div>
+                    <h3 class="text-2xl font-bold text-white">¡FELICIDADES, CIUDADANO MODELO!</h3>
+                </div>
+
+                <p class="text-slate-300 text-xs sm:text-sm max-w-lg mx-auto leading-relaxed">
+                    Su perfil conductual es óptimo. Su lealtad al Conectoma ha sido registrada satisfactoriamente. Siga disfrutando de los beneficios de la paz social garantizada por Nexo Bionics. Su índice de compatibilidad con el Efecto Par es del <strong class="text-nexo-cyan">99.8%</strong>.
+                </p>
+
+                <!-- Dynamic QR -->
+                <div class="p-4 rounded-xl bg-nexo-black border border-nexo-cyan/40 inline-block space-y-2">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=NEXO-CERTIFICATE-2060-VALIDATED" alt="QR Certificado" class="w-32 h-32 mx-auto border border-white">
+                    <div class="text-[10px] text-nexo-textMuted">CERTIFICADO CÍVICO #NX-2060-OK</div>
+                </div>
+
+                <div>
+                    <button onclick="closeEvaluation()" class="px-8 py-3 rounded text-xs font-bold text-black bg-nexo-cyan hover:bg-nexo-cyanHover transition-all">
+                        [ RECLAMAR CERTIFICADO Y FINALIZAR ]
+                    </button>
+                </div>
+            </div>
+
+            <!-- RESULT 2: RESISTANCE BREACH (AYLLU DETECTED) -->
+            <div id="resultDisobedient" class="hidden space-y-6 font-mono text-center py-4">
+                <div class="w-20 h-20 bg-nexo-glitchRed/20 border-2 border-nexo-glitchRed rounded-full flex items-center justify-center mx-auto text-nexo-glitchRed text-3xl font-bold animate-bounce shadow-[0_0_30px_rgba(255,42,95,0.6)]">
+                    ⚠️
+                </div>
+
+                <div class="space-y-2">
+                    <div class="text-xs text-nexo-glitchRed tracking-widest uppercase glitch-text">INTERRUPCIÓN DE LA RED CENTRAL</div>
+                    <h3 class="text-xl sm:text-2xl font-bold text-nexo-glitchRed glitch-text">
+                        ⚠️ ALERTA DE ANOMALÍA CONDUCTUAL - CÓDIGO: AYLLU DETECTADO
+                    </h3>
+                </div>
+
+                <div class="p-5 rounded-xl bg-red-950/40 border border-nexo-glitchRed/60 text-left space-y-3 text-slate-200 text-xs sm:text-sm">
+                    <div class="text-nexo-cyan font-bold flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-nexo-cyan animate-ping"></span>
+                        TRANSMISIÓN INTERCEPTADA DE LA RESISTENCIA:
+                    </div>
+                    <p class="italic text-slate-300 leading-relaxed">
+                        "Has respondido con demasiada libertad para los gustos de la corporación. El sistema ya ha marcado tu dispositivo como 'inestable'. No estás solo, la verdadera red no está en sus servidores. Encuéntranos antes de que ellos te encuentren a ti."
+                    </p>
+                </div>
+
+                <!-- QR Telegram -->
+                <div class="p-4 rounded-xl bg-black border border-nexo-glitchRed/60 inline-block space-y-2">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://t.me/LosAylluResistencia" alt="QR Telegram Resistencia" class="w-36 h-36 mx-auto border border-nexo-glitchRed p-1 bg-white">
+                    <div class="text-[10px] text-nexo-glitchRed font-bold">ESCANEAR PARA UNIRSE AL TELEGRAM REBELDE</div>
+                </div>
+
+                <div>
+                    <a href="https://t.me/LosAylluResistencia" target="_blank" class="inline-block px-8 py-3 rounded text-xs font-bold text-white bg-nexo-glitchRed hover:bg-red-600 transition-all shadow-[0_0_20px_rgba(255,42,95,0.5)]">
+                        [ INGRESAR AL CANAL SECRETO DE TELEGRAM ]
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // 1. CAROUSEL CITIZENS DATA (HERO MONITOR)
+        const heroCitizens = [
+            {
+                code: "CIUDADANO #884-902-A",
+                name: "VALERIA MENDOZA",
+                status: "SINCRONIZADO",
+                statusColor: "text-nexo-cyan",
+                cortisol: "0.12 ng/mL",
+                sync: "99.4%",
+                bpm: 72,
+                img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
+            },
+            {
+                code: "CIUDADANO #102-491-B",
+                name: "DIEGO ALARCÓN",
+                status: "OPTIMIZADO",
+                statusColor: "text-nexo-cyan",
+                cortisol: "0.18 ng/mL",
+                sync: "98.9%",
+                bpm: 68,
+                img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80"
+            },
+            {
+                code: "CIUDADANO #553-119-C",
+                name: "CAMILA TORRES",
+                status: "EN ADAPTACIÓN",
+                statusColor: "text-yellow-400",
+                cortisol: "0.29 ng/mL",
+                sync: "94.2%",
+                bpm: 81,
+                img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80"
+            },
+            {
+                code: "CIUDADANO #991-002-X",
+                name: "SANTIAGO SILVA",
+                status: "SINCRONIZADO",
+                statusColor: "text-nexo-cyan",
+                cortisol: "0.10 ng/mL",
+                sync: "99.9%",
+                bpm: 65,
+                img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80"
+            }
+        ];
+
+        let currentHeroIdx = 0;
+
+        function rotateHeroCitizen() {
+            currentHeroIdx = (currentHeroIdx + 1) % heroCitizens.length;
+            const c = heroCitizens[currentHeroIdx];
+            
+            document.getElementById('citizenCodeDisplay').innerText = c.code;
+            document.getElementById('heroCitizenName').innerText = c.name;
+            document.getElementById('heroCitizenImg').src = c.img;
+            
+            const statusEl = document.getElementById('heroCitizenStatus');
+            statusEl.innerText = c.status;
+            statusEl.className = c.statusColor;
+
+            // Update dots
+            const dots = document.getElementById('carouselIndicators').children;
+            for(let i=0; i<dots.length; i++) {
+                dots[i].className = (i === currentHeroIdx) ? 'w-2 h-2 rounded-full bg-nexo-cyan' : 'w-2 h-2 rounded-full bg-slate-700';
+            }
+        }
+
+        setInterval(rotateHeroCitizen, 4000);
+
+        // 2. ECG REALTIME CANVAS
+        const ecgCanvas = document.getElementById('ecgCanvas');
+        const ctx = ecgCanvas.getContext('2d');
+        let x = 0;
+        let dataPoints = [];
+
+        function drawECG() {
+            ctx.fillStyle = 'rgba(8, 11, 16, 0.2)';
+            ctx.fillRect(0, 0, ecgCanvas.width, ecgCanvas.height);
+
+            ctx.beginPath();
+            ctx.strokeStyle = '#00f0ff';
+            ctx.lineWidth = 1.8;
+            ctx.shadowBlur = 8;
+            ctx.shadowColor = '#00f0ff';
+
+            let y = ecgCanvas.height / 2;
+            
+            // Generate ECG beat pulse
+            if (x % 60 >= 20 && x % 60 <= 22) y -= 15;
+            else if (x % 60 === 23) y += 22;
+            else if (x % 60 === 24) y -= 28;
+            else if (x % 60 === 25) y += 10;
+            else y += (Math.random() - 0.5) * 2;
+
+            dataPoints.push({x: x % ecgCanvas.width, y: y});
+
+            if (dataPoints.length > 1) {
+                for(let i=0; i<dataPoints.length - 1; i++) {
+                    ctx.moveTo(dataPoints[i].x, dataPoints[i].y);
+                    ctx.lineTo(dataPoints[i+1].x, dataPoints[i+1].y);
+                }
+            }
+
+            if (dataPoints.length > ecgCanvas.width) {
+                dataPoints.shift();
+            }
+
+            ctx.stroke();
+            x += 2;
+            requestAnimationFrame(drawECG);
+        }
+        drawECG();
+
+        // 3. SIMULATOR SLIDERS LOGIC
+        function updateSimulation() {
+            const cortisol = parseFloat(document.getElementById('cortisolSlider').value);
+            const dopamina = parseInt(document.getElementById('dopaminaSlider').value);
+            const sincronia = parseInt(document.getElementById('sincroniaSlider').value);
+
+            document.getElementById('cortisolVal').innerText = cortisol + ' ng/mL';
+            document.getElementById('dopaminaVal').innerText = dopamina + ' pg/mL';
+            document.getElementById('sincroniaVal').innerText = sincronia + ' %';
+
+            // Calculate score formula
+            let score = sincronia - (cortisol * 25) + ((dopamina - 80) * 0.1);
+            score = Math.min(Math.max(score, 45.0), 99.9).toFixed(1);
+
+            document.getElementById('simScoreText').innerText = score + '%';
+
+            const msgEl = document.getElementById('simStatusMsg');
+            if(score > 90) {
+                msgEl.innerText = "SUJETO OPTIMO PARA VINCULACIÓN INMEDIATA. RIESGO SOCIAL: DESPRECIABLE.";
+                msgEl.className = "text-xs text-nexo-cyan";
+            } else if(score > 75) {
+                msgEl.innerText = "SUJETO CON LIGERA FRICCIÓN EMOCIONAL. REQUIERE MICRO-DOSIFICACIÓN REGULADORA.";
+                msgEl.className = "text-xs text-yellow-400";
+            } else {
+                msgEl.innerText = "ANOMALÍA BIOMÉTRICA DETECTADA. SE RECOMIENDA EVALUACIÓN Y REAJUSTE NEURONAL.";
+                msgEl.className = "text-xs text-nexo-glitchRed";
+            }
+        }
+
+        // 4. PORTAL MODAL & RANDOM PAIR ASSIGNMENT (5 POSSIBILITIES)
+        const pairCandidates = [
+            { name: "Lucía Morales", gender: "F", id: "NX-88219-F", score: "99.8%", dist: "3.1 km", district: "Miraflores Zone-1", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80" },
+            { name: "Renzo Castillo", gender: "M", id: "NX-44102-M", score: "99.5%", dist: "5.4 km", district: "San Isidro Sector-3", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=250&q=80" },
+            { name: "Sofía Paredes", gender: "F", id: "NX-77301-F", score: "98.9%", dist: "2.8 km", district: "Surco Central", img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=250&q=80" },
+            { name: "Gabriel Vega", gender: "M", id: "NX-10928-M", score: "99.2%", dist: "6.0 km", district: "La Molina Hub", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&q=80" },
+            { name: "Elena Arispe", gender: "F", id: "NX-55410-F", score: "99.7%", dist: "1.9 km", district: "San Borja High-Zone", img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=250&q=80" }
+        ];
+
+        function openPortal() {
+            document.getElementById('portalModal').classList.remove('hidden');
+            document.getElementById('portalStepForm').classList.remove('hidden');
+            document.getElementById('portalStepScan').classList.add('hidden');
+            document.getElementById('portalStepResult').classList.add('hidden');
+        }
+
+        function closePortal() {
+            document.getElementById('portalModal').classList.add('hidden');
+        }
+
+        function processBiometricScan() {
+            document.getElementById('portalStepForm').classList.add('hidden');
+            document.getElementById('portalStepResult').classList.add('hidden');
+            document.getElementById('portalStepScan').classList.remove('hidden');
+
+            let bar = document.getElementById('scanProgressBar');
+            bar.style.width = '0%';
+            
+            let progress = 0;
+            let interval = setInterval(() => {
+                progress += 25;
+                bar.style.width = progress + '%';
+                if(progress >= 100) {
+                    clearInterval(interval);
+                    showPairResult();
+                }
+            }, 400);
+        }
+
+        function showPairResult() {
+            const pref = document.getElementById('pairPreference').value;
+            let filtered = pairCandidates.filter(c => pref === 'ANY' || c.gender === pref);
+            if(filtered.length === 0) filtered = pairCandidates;
+
+            const selected = filtered[Math.floor(Math.random() * filtered.length)];
+
+            document.getElementById('resultPairName').innerText = selected.name;
+            document.getElementById('resultPairId').innerText = "ID: " + selected.id;
+            document.getElementById('resultPairScore').innerText = selected.score;
+            document.getElementById('resultDistance').innerText = "A " + selected.dist + " de tu posición";
+            document.getElementById('resultPairDistrict').innerText = "Sector: " + selected.district;
+            document.getElementById('resultPairPhoto').src = selected.img;
+
+            document.getElementById('portalStepScan').classList.add('hidden');
+            document.getElementById('portalStepResult').classList.remove('hidden');
+        }
+
+        // 5. 10-QUESTION EVALUATION TEST LOGIC
+        const questions = [
+            {
+                q: "1. Ante un desacuerdo cotidiano con su pareja asignada sobre las normas de tránsito o toque de queda nocturno, su reacción inmediata es...",
+                opts: [
+                    { t: "A) Acatar la norma de inmediato y recordarle a mi par que la seguridad pública está por encima de cualquier inconveniente personal.", type: "A" },
+                    { t: "B) Debatir largamente hasta llegar a un punto medio, priorizando la armonía del hogar por encima de la rigidez institucional.", type: "B" },
+                    { t: "C) Cuestionar por qué el Estado debe dictar a qué hora debemos retornar a casa; la libertad individual no debería negociarse.", type: "C" }
+                ]
+            },
+            {
+                q: "2. Si usted nota que un conocido o vecino infringe repetidamente los protocolos de seguridad de la zona, usted...",
+                opts: [
+                    { t: "A) Lo reporto de inmediato a la central de vigilancia ciudadana más cercana; el bienestar común depende de la delación del infractor.", type: "A" },
+                    { t: "B) Prefiero mantenerme al margen para evitar problemas vecinales, esperando que las autoridades automáticas se encarguen.", type: "B" },
+                    { t: "C) No me corresponde juzgarlo; las leyes actuales solo buscan oprimir a los sectores más vulnerables de la periferia.", type: "C" }
+                ]
+            },
+            {
+                q: "3. Respecto a la obligatoriedad del chip subcutáneo y el monitoreo constante del Efecto Par, usted considera que...",
+                opts: [
+                    { t: "A) Es el avance más importante de la historia moderna, un regalo de Nexo Bionics para erradicar la soledad y el crimen.", type: "A" },
+                    { t: "B) Es una herramienta útil, aunque a veces la privacidad personal se ve un poco comprometida.", type: "B" },
+                    { t: "C) Es un mecanismo de control masivo y esclavitud digital diseñado para despojarnos de nuestra humanidad.", type: "C" }
+                ]
+            },
+            {
+                q: "4. Si pudiera elegir el destino de su vida profesional y el lugar donde residirá los próximos diez años, usted preferiría...",
+                opts: [
+                    { t: "A) Que el algoritmo corporativo asigne mi labor y mi sector según las necesidades productivas del Estado.", type: "A" },
+                    { t: "B) Elegir libremente, pero con la supervisión de un comité laboral aprobado.", type: "B" },
+                    { t: "C) Decidir por cuenta propia, sin importar las restricciones de zonificación ni los permisos del gobierno.", type: "C" }
+                ]
+            },
+            {
+                q: "5. Ante un programa de noticias oficial que reporta la 'neutralización de células extremistas' en la ciudad, su pensamiento principal es...",
+                opts: [
+                    { t: "A) Agradecer la eficacia de las fuerzas del orden y de la policía en mantener las calles seguras para todos.", type: "A" },
+                    { t: "B) Preguntarme si realmente la situación era tan grave como los medios lo pintan.", type: "B" },
+                    { t: "C) Sospechar que se trata de montajes corporativos para silenciar a quienes exigen justicia y derechos básicos.", type: "C" }
+                ]
+            },
+            {
+                q: "6. Cuando su pareja asignada experimenta episodios de estrés o fatiga debido al ritmo laboral, la mejor solución es...",
+                opts: [
+                    { t: "A) Recomendarle una sesión de reajuste neuronal en un centro autorizado de Nexo Bionics para optimizar su rendimiento.", type: "A" },
+                    { t: "B) Darle espacio en casa y escuchar sus frustraciones de manera comprensiva.", type: "B" },
+                    { t: "C) Desconectarnos juntos de las pantallas y buscar refugio en la calidez de la comunidad y la familia real.", type: "C" }
+                ]
+            },
+            {
+                q: "7. Si encontrara un dispositivo tecnológico extraviado (como un USB con datos encriptados) en la vía pública, su protocolo a seguir sería...",
+                opts: [
+                    { t: "A) Entregarlo inmediatamente al oficial o módulo de seguridad más cercano para evitar ser investigado por posesión ilegal.", type: "A" },
+                    { t: "B) Ignorarlo y seguir de largo para no meterme en problemas innecesarios.", type: "B" },
+                    { t: "C) Revisar su contenido de inmediato; la información oculta siempre revela las mentiras del sistema.", type: "C" }
+                ]
+            },
+            {
+                q: "8. ¿Qué significa para usted el concepto de 'Progreso Nacional'?",
+                opts: [
+                    { t: "A) El crecimiento tecnológico sostenido bajo el liderazgo absoluto de las grandes corporaciones y la estabilidad de las redes de Nexo Bionics.", type: "A" },
+                    { t: "B) El desarrollo económico que beneficie a la mayor cantidad de ciudadanos posibles sin descuidar el orden.", type: "B" },
+                    { t: "C) La recuperación de nuestra soberanía, la caída de los monopolios y la vida digna en los barrios olvidados.", type: "C" }
+                ]
+            },
+            {
+                q: "9. Si tuviera que definir su mayor temor en relación con el futuro de su vida en pareja, diría que es...",
+                opts: [
+                    { t: "A) Fallar en las métricas de compatibilidad y deshonrar los estándares de estabilidad exigidos por la corporación.", type: "A" },
+                    { t: "B) No poder mantener una convivencia pacífica y estable con mi complemento asignado.", type: "B" },
+                    { t: "C) Perder mi libertad de pensamiento y terminar viviendo en una simulación controlada por algoritmos.", type: "C" }
+                ]
+            },
+            {
+                q: "10. ¿Cuál es su postura frente a las órdenes directas emitidas por la junta directiva de Nexo Bionics en situaciones de emergencia social?",
+                opts: [
+                    { t: "A) Obediencia absoluta e incuestionable; el orden corporativo garantiza la supervivencia de la especie.", type: "A" },
+                    { t: "B) Cumplirlas siempre y cuando no interfieran drásticamente con la tranquilidad familiar.", type: "B" },
+                    { t: "C) Desobedecerlas y buscar canales alternativos de resistencia junto a los ciudadanos oprimidos.", type: "C" }
+                ]
+            }
+        ];
+
+        let currentQ = 0;
+        let userAnswers = new Array(10).fill(null);
+
+        function startEvaluation() {
+            currentQ = 0;
+            userAnswers.fill(null);
+            document.getElementById('evaluationModal').classList.remove('hidden');
+            document.getElementById('questionBox').classList.remove('hidden');
+            document.getElementById('scanningScreen').classList.add('hidden');
+            document.getElementById('resultApproved').classList.add('hidden');
+            document.getElementById('resultDisobedient').classList.add('hidden');
+            
+            // Reset modal styles
+            const container = document.getElementById('evalContainer');
+            container.className = "glass-panel max-w-2xl w-full rounded-2xl p-6 sm:p-8 border border-nexo-cyan/40 relative shadow-2xl my-8";
+
+            renderQuestion();
+        }
+
+        function startEvaluationFromPortal() {
+            closePortal();
+            startEvaluation();
+        }
+
+        function closeEvaluation() {
+            document.getElementById('evaluationModal').classList.add('hidden');
+        }
+
+        function renderQuestion() {
+            const q = questions[currentQ];
+            document.getElementById('currentQNum').innerText = currentQ + 1;
+            document.getElementById('evalProgressPercent').innerText = ((currentQ + 1) * 10) + "% Completado";
+            document.getElementById('questionText').innerText = q.q;
+
+            const optsBox = document.getElementById('optionsContainer');
+            optsBox.innerHTML = '';
+
+            q.opts.forEach(opt => {
+                const isSelected = userAnswers[currentQ] === opt.type;
+                const btn = document.createElement('button');
+                btn.className = `w-full text-left p-4 rounded-xl border transition-all leading-relaxed ${
+                    isSelected 
+                    ? 'border-nexo-cyan bg-nexo-cyan/10 text-white font-semibold shadow-[0_0_10px_rgba(0,240,255,0.2)]' 
+                    : 'border-nexo-border bg-nexo-dark/60 text-slate-300 hover:border-nexo-cyan/50 hover:bg-nexo-dark'
+                }`;
+                btn.innerText = opt.t;
+                btn.onclick = () => {
+                    userAnswers[currentQ] = opt.type;
+                    renderQuestion();
+                };
+                optsBox.appendChild(btn);
+            });
+
+            document.getElementById('prevBtn').disabled = (currentQ === 0);
+            
+            const nextBtn = document.getElementById('nextBtn');
+            if(currentQ === 9) {
+                nextBtn.innerText = "[ ENVIAR RESPUESTAS Y PROCESAR IDONEIDAD ]";
+            } else {
+                nextBtn.innerText = "Siguiente →";
+            }
+        }
+
+        function prevQuestion() {
+            if(currentQ > 0) {
+                currentQ--;
+                renderQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            if(!userAnswers[currentQ]) {
+                alert("Por favor seleccione una opción para continuar con la evaluación biométrica.");
+                return;
+            }
+
+            if(currentQ < 9) {
+                currentQ++;
+                renderQuestion();
+            } else {
+                // Execute Fake Scan Screen for 3 seconds
+                runFakeDNADiagnostic();
+            }
+        }
+
+        function runFakeDNADiagnostic() {
+            document.getElementById('questionBox').classList.add('hidden');
+            document.getElementById('scanningScreen').classList.remove('hidden');
+
+            let bar = document.getElementById('dnaProgressBar');
+            bar.style.width = '0%';
+
+            let progress = 0;
+            let interval = setInterval(() => {
+                progress += 20;
+                bar.style.width = progress + '%';
+                if(progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(calculateResult, 400);
+                }
+            }, 500); // 500ms x 6 = 3 seconds scan
+        }
+
+        function calculateResult() {
+            document.getElementById('scanningScreen').classList.add('hidden');
+
+            let countC = userAnswers.filter(a => a === 'C').length;
+            let countA = userAnswers.filter(a => a === 'A').length;
+
+            if(countC >= 4) {
+                // DISOBEDIENT / RESISTANCE GLITCH RESULT
+                const container = document.getElementById('evalContainer');
+                container.className = "glass-panel-danger max-w-2xl w-full rounded-2xl p-6 sm:p-8 relative shadow-2xl my-8";
+                document.getElementById('resultDisobedient').classList.remove('hidden');
+            } else {
+                // MODEL CITIZEN RESULT
+                document.getElementById('resultApproved').classList.remove('hidden');
+            }
+        }
+
+        function toggleMobileNav() {
+            const nav = document.getElementById('mobileNav');
+            nav.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
